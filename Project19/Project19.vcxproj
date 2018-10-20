@@ -26,9 +26,6 @@
     <ClCompile Include="Bitwriter.cpp" />
     <ClCompile Include="Huff.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="cpp.hint" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{AB7A7D33-0858-464F-9A92-43802E668FEB}</ProjectGuid>
