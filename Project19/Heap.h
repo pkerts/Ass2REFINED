@@ -20,9 +20,9 @@ private:
 	std::vector<Data> data_;
 	void bubbleUp(int i, Priority priority);
 	void bubbleDown(int i, Priority priority);
-	int parent(int i);
-	int leftChild(int i);
-	int rightChild(int i);
+	int parent(int i) const;
+	int leftChild(int i) const;
+	int rightChild(int i) const;
 };
 
 template <typename Data, typename Priority>
@@ -101,19 +101,19 @@ void HeapH<Data, Priority>::bubbleDown(int i, Priority priority)
 }
 
 template <typename Data, typename Priority>
-int HeapH<Data, Priority>::parent(const int i)
+int HeapH<Data, Priority>::parent(const int i) const
 {
 	return (i - 1) / 2;
 }
 
 template <typename Data, typename Priority>
-int HeapH<Data, Priority>::leftChild(const int i)
+int HeapH<Data, Priority>::leftChild(const int i) const
 {
 	return (2 * i + 1);
 }
 
 template <typename Data, typename Priority>
-int HeapH<Data, Priority>::rightChild(const int i)
+int HeapH<Data, Priority>::rightChild(const int i) const
 {
 	return (2 * i + 2);
 }
