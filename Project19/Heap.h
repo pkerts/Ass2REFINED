@@ -3,8 +3,6 @@
 #include <iostream>
 #include <algorithm>
 
-// Simple Heap container that holds data. When you add data to it, it says cool. That's it. :)
-
 template<typename Data, typename Priority>
 class HeapH
 {
@@ -12,10 +10,9 @@ public:
 	void push(Priority priority, Data data);
 	Data pop(Priority priority);
 	bool is_empty(){ return data_.empty(); }
-
 	int size(){ return data_.size(); }
 	void display();
-	void HeapSort();
+	// void HeapSort();
 private:
 	std::vector<Data> data_;
 	void bubbleUp(int i, Priority priority);
@@ -30,7 +27,6 @@ void HeapH<Data, Priority>::push(Priority priority, Data data)
 {
 	data_.push_back(data);
 	bubbleUp((data_.size() - 1), priority);
-	std::cout << "cool, data added. done" << std::endl;
 }
 
 template <typename Data, typename Priority>
@@ -43,11 +39,11 @@ void HeapH<Data, Priority>::display()
 	}
 }
 
-template <typename Data, typename Priority>
-void HeapH<Data, Priority>::HeapSort()
-{
-	std::sort(data_.begin(), data_.end(), Priority());
-}
+//template <typename Data, typename Priority>
+//void HeapH<Data, Priority>::HeapSort()
+//{
+//	std::sort(data_.begin(), data_.end(), Priority());
+//}
 
 template <typename Data, typename Priority>
 Data HeapH<Data, Priority>::pop(Priority priority)

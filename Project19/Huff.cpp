@@ -76,13 +76,13 @@ void clean(Node* root)
 
 int main(int argc, char** argv) // The compiled code will take an argument
 {
+	// BUILD FREQUENCY TABLE
 	string filename = argv[1];
-
 	ifstream in(filename);
 	buildFrequencyTable(in);
 
+	// BUILD PRIORITY QUEUE
 	HeapH<Node, Priority> heap;
-
 	for (auto i = 0; i < UCHAR_MAX+1; i++)
 	{
 		const auto frequency = frequency_table[i];
@@ -94,6 +94,7 @@ int main(int argc, char** argv) // The compiled code will take an argument
 		}
 	}
 
+	// BUILD HUFFMAN TREE
 	while (heap.size() > 1)
 	{
 		const auto left = new Node{ heap.pop(Priority()) };
@@ -106,9 +107,11 @@ int main(int argc, char** argv) // The compiled code will take an argument
 
 	createCodedSymbols(root, 0, 0);
 
+	// COMPRESSED FILE OUTPUT
 	filename.append(".huff");
 	Bitwriter writer(filename);
 
+	// Variable-length records
 	for (auto& i : coded_symbols_array)
 	{
 		writer.putByte(i.length);
@@ -129,13 +132,14 @@ int main(int argc, char** argv) // The compiled code will take an argument
 	}
 	writer.flush();
 
+	// Number of symbols in the file
 	in.seekg(0, ios_base::end);
 	const uint32_t file_length = in.tellg();
 	in.seekg(0);
 	writer.putLength(file_length);
 
+	// Coded symbols
 	auto bits_written = 0;
-
 	for (unsigned int file_pos = 0; file_pos < file_length; file_pos++)
 	{
 		in.seekg(file_pos);
@@ -159,7 +163,7 @@ int main(int argc, char** argv) // The compiled code will take an argument
 		bits_written = 0;
 	}
 
+	// CLEANUP
 	clean(root);
-
 	return 0;
 }
